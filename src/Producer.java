@@ -9,12 +9,9 @@ public class Producer implements Runnable {
   @Override
   public void run() {
 
-    int i = 1;
-    while (Q.count.get() <= 10) {
-      q.put(i++);
-      Q.count.incrementAndGet();
+    while (Q.count.get() < q.getN()) {
+      q.put(Q.count.incrementAndGet());
     }
-    Q.valueSet.set(false);
     System.out.println("Out from producer");
   }
 }

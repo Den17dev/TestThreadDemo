@@ -3,6 +3,7 @@ public class Main {
 
   public static void main(String[] args) throws InterruptedException {
     Q q = new Q(10);
+
     Producer producer = new Producer(q);
     Consumer consumer = new Consumer(q);
 

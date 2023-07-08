@@ -9,7 +9,7 @@ public class Consumer implements Runnable {
   @Override
   public void run() {
 
-    while (Q.count.get() <= 10) {
+    while (Q.count.get() < q.getN()) {
       q.get();
     }
     System.out.println("Out from consumer");
