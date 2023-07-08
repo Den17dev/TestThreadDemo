@@ -1,6 +1,6 @@
 public class Consumer implements Runnable {
 
-  Q q;
+  private Q q;
 
   Consumer(Q q) {
     this.q = q;

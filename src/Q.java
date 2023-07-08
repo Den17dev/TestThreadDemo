@@ -1,19 +1,22 @@
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
 
-public class Q{
+public class Q {
 
 
-  static AtomicInteger count = new AtomicInteger(1);
-  int n;
+  public static AtomicInteger count = new AtomicInteger(1);
+  public static AtomicBoolean valueSet = new AtomicBoolean(false);
+  private int n;
 
-  static AtomicBoolean valueSet = new AtomicBoolean(false);
+  Q (int n){
+    this.n = n;
+  }
 
-  synchronized void put(int n){
-    while(valueSet.get()){
-      try{
+  synchronized void put(int n) {
+    while (valueSet.get() && n < 11) {
+      try {
         wait();
-      }catch (InterruptedException ex){
+      } catch (InterruptedException ex) {
         ex.printStackTrace();
       }
     }
@@ -23,11 +26,13 @@ public class Q{
     notify();
   }
 
-  synchronized int get(){
-    while(!valueSet.get()){
-      try{
+  synchronized int get() {
+    // todo: добавить проверку что  n<10 (10 не хардкодить а унести в конструктор)
+    while (!valueSet.get() && n < 11) {  //true-false
+      try {
         wait();
-      }catch (InterruptedException ex){
+      } catch (InterruptedException ex) {
+        System.out.println("is interrapted");
         ex.printStackTrace();
       }
     }
